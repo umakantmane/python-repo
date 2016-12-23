@@ -1,0 +1,71 @@
+
+import MySQLdb
+
+db = MySQLdb.connect()
+
+cursor = db.cursor()
+
+cursor.execute(sql)
+
+
+Select query:
+=========================================
+cursor.fetchone() or fecthmany() or fetchall()
+
+cursor.rowcount
+
+
+insert query
+=========================================
+
+Example:
+
+Single insert:
+==========================================
+#!/usr/bin/python
+
+import MySQLdb
+
+# Open database connection
+db = MySQLdb.connect("localhost","umakant","welcome@123","practice" )
+
+# prepare a cursor object using cursor() method
+cursor = db.cursor()
+
+sql = "INSERT INTO users(username, phone, email)" \
+	  "values(%s, %s, %s)"
+
+args = ("umakant", "9986034800", "umakantmaneit@gmail.com")	  	
+# execute SQL query using execute() method.
+cursor.execute(sql, args)
+
+if cursor.lastrowid:
+    print('last insert id', cursor.lastrowid)
+else:
+    print('last insert id not found')
+
+db.commit();    
+
+
+db.close()
+
+sql
+
+batchinsert:
+===================================================
+
+args = [("umakant", 9986034800, "umakantmaneit@gmail.com"), ("srikant", 9986034800, "srikantmane@gmail.com")]	  	
+# execute SQL query using execute() method.
+cursor.executemany(sql, args)
+
+if cursor.lastrowid:
+    print('last insert id', cursor.lastrowid)
+else:
+    print('last insert id not found')
+
+db.commit();    
+
+
+db.close()
+cursor.execute(sql, args) or executemany() or
+db.commit()
